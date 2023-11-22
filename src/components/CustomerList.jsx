@@ -69,7 +69,7 @@ export default function CustomerList() {
 
     // Yksi nimisarake; aakkosjärjestys sukunimen mukaan, tekstihakua voi käyttää etunimeenkin
     function fullNameGetter(customers) {
-        console.log(customers)
+        //console.log(customers)
         return (customers.data.lastname + ', ' + customers.data.firstname)
       };
 
