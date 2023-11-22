@@ -29,16 +29,29 @@ export default function TrainingList() {
             filter: 'agTextColumnFilter',
             suppressMenu: true,
             floatingFilter: true
+        },
+        {
+            headerName: 'Name',
+            colId: 'lastname&firstname',
+            sortable: true,
+            filter: 'agTextColumnFilter',
+            suppressMenu: true,
+            floatingFilter: true,
+            valueGetter: fullNameGetter
         }
     ]);
     useEffect(()=> fetchData(), []);
 
     const fetchData = () => {
-        fetch('http://traineeapp.azurewebsites.net/api/trainings')
+        fetch('https://traineeapp.azurewebsites.net/gettrainings')
         .then(response => response.json())
-        .then(data => setTrainings(data.content))
+        .then(data => setTrainings(data))
         .catch(err => console.error(err))
     };
+
+    function fullNameGetter(trainings) {
+        return (trainings.data.customer.lastname + ', ' + trainings.data.customer.firstname)
+      };
 
     return(
         <div className='ag-theme-material' style={{width: '1400px', height: '700px', margin: 'auto', padding: '20px 0'}}>
