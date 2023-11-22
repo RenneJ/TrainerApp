@@ -6,7 +6,7 @@ import CustomerList from './components/CustomerList'
 import TrainingList from './components/TrainingList'
 
 function App() {
-    const [value, setValue] = useState('Customers');
+    const [value, setValue] = useState('Trainings');
     const handleChange = (_, value) => {
       setValue(value);
     };
@@ -14,11 +14,12 @@ function App() {
   return (
       <div>
         <Tabs value={value} onChange={handleChange}>
-          <Tab value="Customers" label="Customers" />
-          <Tab value="Trainings" label="Trainings" />
+            <Tab value="Trainings" label="Trainings" />
+            <Tab value="Customers" label="Customers" />
         </Tabs>
         {value === 'Customers' && <div><CustomerList /></div>}
         {value === 'Trainings' && <div><TrainingList /></div>}
+    
       </div>
     )
 }

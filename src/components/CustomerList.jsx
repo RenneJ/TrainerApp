@@ -63,18 +63,20 @@ export default function CustomerList() {
     const fetchData = () => {
         fetch('http://traineeapp.azurewebsites.net/api/customers')
         .then(response => response.json())
-        .then(data => setCustomers(data.content))
+        .then(data => {
+            console.log(data.content)
+            setCustomers(data.content)
+        })
         .catch(err => console.error(err))
     };
 
     // Yksi nimisarake; aakkosjärjestys sukunimen mukaan, tekstihakua voi käyttää etunimeenkin
     function fullNameGetter(customers) {
-        //console.log(customers)
         return (customers.data.lastname + ', ' + customers.data.firstname)
       };
 
     return(
-        <div className='ag-theme-material' style={{width: '1400px', height: '700px', margin: 'auto', padding: '20px 0'}}>
+        <div className='ag-theme-material' style={{width: '1200px', height: '700px', margin: 'auto', padding: '20px 0'}}>
             <AgGridReact 
                 columnDefs={columnDefs}
                 rowData={customers}
