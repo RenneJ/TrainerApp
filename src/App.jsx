@@ -3,15 +3,15 @@ import './App.css'
 import CustomerList from './components/CustomerList'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0)
 
-  return (
+    return (
     <>
-      <div className='App'>
-        <CustomerList />
-      </div>
+        <div className='App'>
+            <CustomerList />
+        </div>
     </>
-  )
+    )
 }
 
 export default App
