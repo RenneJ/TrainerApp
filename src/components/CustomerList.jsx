@@ -3,11 +3,19 @@ import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 import CustomerForm from './CustomerForm';
+import CustomerEditForm from './CustomerEditForm';
 
 
 export default function CustomerList() {
     // As
     const [customers, setCustomers] = useState([]);
+
+    const editButton = (row) => {
+        return(
+            // 
+            <CustomerEditForm editCustomer={editCustomer} customer={row.data}/>
+        );
+    };
     const [columnDefs, setColumnDefs] = useState([
         {
             headerName: 'Name',
@@ -57,7 +65,11 @@ export default function CustomerList() {
             filter: 'agTextColumnFilter',
             suppressMenu: true,
             floatingFilter: true
-        }
+        },
+        {
+            width: 90,
+            cellRenderer: editButton
+        },
     ]);
 
     useEffect(()=> fetchData(), []);
@@ -74,8 +86,10 @@ export default function CustomerList() {
 
     // Yksi nimisarake; aakkosjärjestys sukunimen mukaan, tekstihakua voi käyttää etunimeenkin
     function fullNameGetter(customers) {
-        return (customers.data.lastname + ', ' + customers.data.firstname)
-      };
+            return (customers.data.lastname + ', ' + customers.data.firstname)
+        };
+    
+      
 
     // CRUD-metodit
     const saveCustomer = (customer) => {
@@ -92,6 +106,19 @@ export default function CustomerList() {
         //handleSnackOpen(action);
     };
     
+    const editCustomer = (customer, link) => {
+        const action = 'Edit'
+        fetch(link, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(customer)
+        })
+        .then(response => fetchData())
+        .catch(err => console.error(err))
+        //handleSnackOpen(action);
+    }
 
     return(
         <div className='ag-theme-material' style={{width: '1200px', height: '700px', margin: 'auto', padding: '20px 0'}}>
