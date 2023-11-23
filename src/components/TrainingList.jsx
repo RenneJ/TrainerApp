@@ -51,14 +51,14 @@ export default function TrainingList() {
         .catch(err => console.error(err))
     };
 
-    const dateFormatter = (trainings) => {
+    function dateFormatter(trainings) {
         return(
             dayjs(trainings.data.date).format('DD/MM/YYYY hh:ss')
         )
     };
 
-    const fullNameGetter = (trainings) => {
-        console.log(trainings.data);
+    function fullNameGetter(trainings) {
+        //console.log(trainings.data);
         // Tämä ehtolauseke korjaa virheen kun tietokannasta haetaan trainings rivi, jonka customer attribuutti on null
         // TODO: muista päiväkirjaan tämän virheen jäljitys (joku lisäs tietokantaa trainingsrivejä ilman asiakastietoja)
         if(trainings.data.customer === null){

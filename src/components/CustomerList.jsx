@@ -2,7 +2,7 @@ import {useState, useEffect, forwardRef} from 'react';
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
-import AddCustomer from './AddCustomer';
+import CustomerForm from './CustomerForm';
 
 
 export default function CustomerList() {
@@ -73,11 +73,25 @@ export default function CustomerList() {
     };
 
     // Yksi nimisarake; aakkosjärjestys sukunimen mukaan, tekstihakua voi käyttää etunimeenkin
-    const fullNameGetter = (customers) => {
+    function fullNameGetter(customers) {
         return (customers.data.lastname + ', ' + customers.data.firstname)
       };
 
-
+    // CRUD-metodit
+    const saveCustomer = (customer) => {
+        const action = 'Save'
+        fetch('http://traineeapp.azurewebsites.net/api/customers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(customer)
+        })
+        .then(response => fetchData())
+        .catch(err => console.error(err))
+        //handleSnackOpen(action);
+    };
+    
 
     return(
         <div className='ag-theme-material' style={{width: '1200px', height: '700px', margin: 'auto', padding: '20px 0'}}>
@@ -88,7 +102,7 @@ export default function CustomerList() {
                 pagination="true"
                 paginationAutoPageSize="true"
             />
-            <AddCustomer teksti={"MINUT RENDERÖIDÄÄN"}/>
+            <CustomerForm saveCustomer={saveCustomer}/>
         </div>
     )
 }
