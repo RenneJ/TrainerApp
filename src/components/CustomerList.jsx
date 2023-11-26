@@ -2,24 +2,23 @@ import {useState, useEffect, forwardRef} from 'react';
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import CustomerForm from './CustomerForm';
 import CustomerEditForm from './CustomerEditForm';
 import CustomerDelete from './CustomerDelete';
 
 
 export default function CustomerList() {
-    // As
     const [customers, setCustomers] = useState([]);
 
     const editButton = (row) => {
         return(
-            // 
             <CustomerEditForm editCustomer={editCustomer} customer={row.data}/>
         );
     };
 
     const deleteButton = (row) => {
-        //var link = row.data._links.self.href
         return(
             <CustomerDelete deleteCustomer={deleteCustomer} customer={row.data}/>
         );
@@ -118,7 +117,7 @@ export default function CustomerList() {
         })
         .then(response => fetchData())
         .catch(err => console.error(err))
-        //handleSnackOpen(action);
+        handleSnackOpen(action);
     };
     
     const editCustomer = (customer, link) => {
@@ -132,7 +131,7 @@ export default function CustomerList() {
         })
         .then(response => fetchData())
         .catch(err => console.error(err))
-        //handleSnackOpen(action);
+        handleSnackOpen(action);
     };
 
     const deleteCustomer = (link) => {
@@ -140,7 +139,27 @@ export default function CustomerList() {
         fetch(link, {method: 'DELETE'})
         .then(response => fetchData())
         .catch(err => console.error(err))
-        //handleSnackOpen(action);
+        handleSnackOpen(action);
+    };
+
+    // Toimintojen vahvistukset; Snackbar
+    const Alert = forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+    const [open, setOpen] = useState(false);
+    const [action, setAction] = useState('');
+
+    const handleSnackOpen = (action) => {
+        setOpen(true);
+        setAction(action)
+      };
+    
+    const handleSnackClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
     };
 
     return(
@@ -153,6 +172,11 @@ export default function CustomerList() {
                 pagination="true"
                 paginationAutoPageSize="true"
             />
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackClose}>
+                <Alert onClose={handleSnackClose} severity="info" sx={{ width: '100%' }}>
+                    {action} succesful!
+                </Alert>
+            </Snackbar>
         </div>
     )
 }
