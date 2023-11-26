@@ -4,6 +4,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 import CustomerForm from './CustomerForm';
 import CustomerEditForm from './CustomerEditForm';
+import CustomerDelete from './CustomerDelete';
 
 
 export default function CustomerList() {
@@ -16,6 +17,14 @@ export default function CustomerList() {
             <CustomerEditForm editCustomer={editCustomer} customer={row.data}/>
         );
     };
+
+    const deleteButton = (row) => {
+        //var link = row.data._links.self.href
+        return(
+            <CustomerDelete deleteCustomer={deleteCustomer} customer={row.data}/>
+        );
+    };
+
     const [columnDefs, setColumnDefs] = useState([
         {
             headerName: 'Name',
@@ -40,7 +49,8 @@ export default function CustomerList() {
             sortable: true,
             filter: 'agTextColumnFilter',
             suppressMenu: true,
-            floatingFilter: true
+            floatingFilter: true,
+            width: 110
         },
         {
             headerName: 'City',
@@ -64,12 +74,17 @@ export default function CustomerList() {
             sortable: true,
             filter: 'agTextColumnFilter',
             suppressMenu: true,
-            floatingFilter: true
+            floatingFilter: true,
+            width: 150
         },
         {
             width: 90,
             cellRenderer: editButton
         },
+        {
+            width: 100,
+            cellRenderer: deleteButton
+        }
     ]);
 
     useEffect(()=> fetchData(), []);
@@ -118,11 +133,19 @@ export default function CustomerList() {
         .then(response => fetchData())
         .catch(err => console.error(err))
         //handleSnackOpen(action);
-    }
+    };
+
+    const deleteCustomer = (link) => {
+        const action = 'Delete';
+        fetch(link, {method: 'DELETE'})
+        .then(response => fetchData())
+        .catch(err => console.error(err))
+        //handleSnackOpen(action);
+    };
 
     return(
-        <div className='ag-theme-material' style={{width: '1300px', height: '700px', margin: 'auto', padding: '20px 0'}}>
-                <CustomerForm saveCustomer={saveCustomer}/>
+        <div className='ag-theme-material' style={{width: '1270px', height: '700px', margin: 'auto', padding: '20px 0'}}>
+            <CustomerForm saveCustomer={saveCustomer}/>
             <AgGridReact 
                 columnDefs={columnDefs}
                 rowData={customers}
