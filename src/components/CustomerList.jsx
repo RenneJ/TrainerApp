@@ -121,7 +121,8 @@ export default function CustomerList() {
     }
 
     return(
-        <div className='ag-theme-material' style={{width: '1200px', height: '700px', margin: 'auto', padding: '20px 0'}}>
+        <div className='ag-theme-material' style={{width: '1300px', height: '700px', margin: 'auto', padding: '20px 0'}}>
+                <CustomerForm saveCustomer={saveCustomer}/>
             <AgGridReact 
                 columnDefs={columnDefs}
                 rowData={customers}
@@ -129,7 +130,6 @@ export default function CustomerList() {
                 pagination="true"
                 paginationAutoPageSize="true"
             />
-            <CustomerForm saveCustomer={saveCustomer}/>
         </div>
     )
 }

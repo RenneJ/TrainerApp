@@ -46,7 +46,7 @@ export default function editCustomer(props) {
     }
     return(
         <div>
-            <Button variant="contained" onClick={handleClickOpen}>Edit</Button>
+            <Button size="small" variant="contained" onClick={handleClickOpen}>Edit</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Edit Customer</DialogTitle>
                 <DialogContent>

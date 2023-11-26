@@ -38,7 +38,7 @@ export default function addCustomer(props) {
     
     return(
         <div>
-            <Button variant="contained" onClick={handleClickOpen}>Add Customer</Button>
+            <Button style={{position: 'relative', right: '565px'}} variant="contained" onClick={handleClickOpen}>Add Customer</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>New Customer</DialogTitle>
                 <DialogContent>
