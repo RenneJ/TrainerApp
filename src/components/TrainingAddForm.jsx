@@ -54,7 +54,7 @@ export default function addTraining(props) {
     
     return(
         <div>
-            <Button style={{position: 'relative', right: '565px'}} variant="contained" onClick={handleClickOpen}>Add Training</Button>
+            <Button variant="contained" onClick={handleClickOpen}>Add Training</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle >New Training</DialogTitle>
                 <DialogContent>
@@ -98,6 +98,14 @@ export default function addTraining(props) {
                             name="customer"
                             label="Customer"
                             onChange={e => handleInputChange(e)}
+                            MenuProps={{
+                                PaperProps: {
+                                    style: {
+                                        maxHeight: 60 * 4.5 + 8,
+                                        width: 250,
+                                    },
+                              }
+                            }}
                         >{
                             customers.map((customer) => {
                                 return(<MenuItem value={customer.links[0].href} key={customer.links[0].href}>{customer.lastname}, {customer.firstname}</MenuItem>)

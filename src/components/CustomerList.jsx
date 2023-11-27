@@ -7,6 +7,7 @@ import MuiAlert from '@mui/material/Alert';
 import CustomerAddForm from './CustomerAddForm';
 import CustomerEditForm from './CustomerEditForm';
 import CustomerDelete from './CustomerDelete';
+import CustomersCSV from './CustomersCSV';
 
 
 export default function CustomerList() {
@@ -160,7 +161,10 @@ export default function CustomerList() {
 
     return(
         <div className='ag-theme-material' style={{width: '1270px', height: '700px', margin: 'auto', padding: '20px 0'}}>
-            <CustomerAddForm saveCustomer={saveCustomer}/>
+            <div style={{display: 'flex', columnGap: '10px'}}>
+                <CustomerAddForm saveCustomer={saveCustomer}/>
+                <CustomersCSV customers={customers} />
+            </div>
             <AgGridReact 
                 columnDefs={columnDefs}
                 rowData={customers}

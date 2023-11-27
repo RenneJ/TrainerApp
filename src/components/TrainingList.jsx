@@ -143,7 +143,9 @@ export default function TrainingList() {
 
     return(
         <div className='ag-theme-material' style={{width: '900px', height: '700px', margin: 'auto', padding: '20px 0'}}>
-            <TrainingAddForm customers={customers} saveTraining={saveTraining}/>
+            <div style={{display: 'flex', columnGap: '10px'}}>
+                <TrainingAddForm customers={customers} saveTraining={saveTraining}/>
+            </div>
             <AgGridReact 
                 columnDefs={columnDefs}
                 rowData={trainings}

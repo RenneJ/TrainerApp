@@ -21,7 +21,7 @@ export default function addCustomer(props) {
 
     const handleClickOpen = () => {
         setOpen(true);
-    }
+    };
 
     const handleClose = () => {
         setOpen(false);
@@ -38,7 +38,7 @@ export default function addCustomer(props) {
     
     return(
         <div>
-            <Button style={{position: 'relative', right: '565px'}} variant="contained" onClick={handleClickOpen}>Add Customer</Button>
+            <Button variant="contained" onClick={handleClickOpen}>Add Customer</Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>New Customer</DialogTitle>
                 <DialogContent>
