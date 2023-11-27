@@ -7,7 +7,6 @@ import MuiAlert from '@mui/material/Alert';
 import CustomerAddForm from './CustomerAddForm';
 import CustomerEditForm from './CustomerEditForm';
 import CustomerDelete from './CustomerDelete';
-import TrainingAddForm from './TrainingAddForm';
 
 
 export default function CustomerList() {
@@ -87,6 +86,12 @@ export default function CustomerList() {
         }
     ]);
 
+    // Yksi nimisarake; aakkosjärjestys sukunimen mukaan, tekstihakua voi käyttää etunimeenkin
+    function fullNameGetter(customers) {
+            return (customers.data.lastname + ', ' + customers.data.firstname)
+        };
+
+    // CRUD-metodit
     useEffect(()=> fetchData(), []);
 
     const fetchData = () => {
@@ -97,13 +102,6 @@ export default function CustomerList() {
         })
         .catch(err => console.error(err))
     };
-
-    // Yksi nimisarake; aakkosjärjestys sukunimen mukaan, tekstihakua voi käyttää etunimeenkin
-    function fullNameGetter(customers) {
-            return (customers.data.lastname + ', ' + customers.data.firstname)
-        };
-
-    // CRUD-metodit
     const saveCustomer = (customer) => {
         const action = 'Save'
         fetch('http://traineeapp.azurewebsites.net/api/customers', {

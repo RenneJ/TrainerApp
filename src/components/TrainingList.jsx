@@ -3,11 +3,21 @@ import {AgGridReact} from 'ag-grid-react';
 import dayjs from 'dayjs';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import TrainingAddForm from './TrainingAddForm';
+import TrainingDelete from './TrainingDelete';
 
 export default function TrainingList() {
     const [trainings, setTrainings] = useState([]);
     const [customers, setCustomers] = useState([]);
+
+    const deleteButton = (row) => {
+        return(
+            <TrainingDelete deleteTraining={deleteTraining} training={row.data}/>
+        );
+    };
+
     const [columnDefs, setColumnDefs] = useState([
         {
             headerName: 'Date',
@@ -19,7 +29,7 @@ export default function TrainingList() {
             valueFormatter: dateFormatter
         },
         {
-            headerName: 'Duration',
+            headerName: 'Duration (mins)',
             field: 'duration',
             sortable: true,
             filter: 'agNumberColumnFilter',
@@ -42,6 +52,10 @@ export default function TrainingList() {
             suppressMenu: true,
             floatingFilter: true,
             valueGetter: fullNameGetter
+        },
+        {
+            width: 100,
+            cellRenderer: deleteButton
         }
     ]);
 
@@ -64,6 +78,8 @@ export default function TrainingList() {
         })
         .catch(err => console.error(err))
     };
+
+    
 
     function dateFormatter(trainings) {
         return(
@@ -95,11 +111,38 @@ export default function TrainingList() {
         })
         .then(response => fetchData())
         .catch(err => console.error(err))
-        //handleSnackOpen(action);
+        handleSnackOpen(action);
     };
-    //console.log(customers)
+
+    const deleteTraining = (id) => {
+        const action = 'Delete';
+        fetch(`http://traineeapp.azurewebsites.net/api/trainings/${id}`, {method: 'DELETE'})
+        .then(response => fetchData())
+        .catch(err => console.error(err))
+        handleSnackOpen(action);
+    };
+
+    // Toimintojen vahvistukset; Snackbar
+    const Alert = forwardRef(function Alert(props, ref) {
+            return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+    const [open, setOpen] = useState(false);
+    const [action, setAction] = useState('');
+
+    const handleSnackOpen = (action) => {
+        setOpen(true);
+        setAction(action)
+    };
+        
+    const handleSnackClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        } setOpen(false);
+    };
+
     return(
-        <div className='ag-theme-material' style={{width: '800px', height: '700px', margin: 'auto', padding: '20px 0'}}>
+        <div className='ag-theme-material' style={{width: '900px', height: '700px', margin: 'auto', padding: '20px 0'}}>
             <TrainingAddForm customers={customers} saveTraining={saveTraining}/>
             <AgGridReact 
                 columnDefs={columnDefs}
@@ -108,6 +151,11 @@ export default function TrainingList() {
                 pagination="true"
                 paginationAutoPageSize="true"
             />
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleSnackClose}>
+                <Alert onClose={handleSnackClose} severity="info" sx={{ width: '100%' }}>
+                    {action} succesful!
+                </Alert>
+            </Snackbar>
         </div>
     )
 }
