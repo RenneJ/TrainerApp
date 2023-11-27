@@ -35,7 +35,7 @@ export default function TrainingList() {
             floatingFilter: true
         },
         {
-            headerName: 'Name',
+            headerName: 'Customer',
             colId: 'lastname&firstname',
             sortable: true,
             filter: 'agTextColumnFilter',
@@ -67,7 +67,7 @@ export default function TrainingList() {
 
     function dateFormatter(trainings) {
         return(
-            dayjs(trainings.data.date).format('DD/MM/YYYY hh:ss')
+            dayjs(trainings.data.date).format('DD/MM/YYYY HH:mm')
         )
     };
 
