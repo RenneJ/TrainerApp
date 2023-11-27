@@ -15,7 +15,7 @@ export default function addTraining(props) {
     const [customers, setCustomers] = useState([]);
     const [training, setTraining] = useState({
         date: '',
-        duration: undefined,
+        duration: 0,
         activity: '',
         customer: '',
     });
@@ -38,7 +38,14 @@ export default function addTraining(props) {
     }
 
     useEffect(()=> setCustomers(props.customers));
-
+    
+    // Asiakkaiden aakkosjärjestys lomakkeen asiakasvalintaa varten
+    useEffect(()=> customersByLastname());
+    
+    const customersByLastname = () =>{
+        customers.sort((a, b) => (a.lastname > b.lastname) ? 1 : ((b.lastname > a.lastname) ? -1 : 0));
+    }
+    
     return(
         <div>
             <Button style={{position: 'relative', right: '565px'}} variant="contained" onClick={handleClickOpen}>Add Training</Button>
@@ -87,7 +94,7 @@ export default function addTraining(props) {
                         onChange={e => handleInputChange(e)}
                     >{
                         customers.map((customer) => {
-                            return <MenuItem value={customer.links[0].href} key={customer.links[0].href}>{customer.lastname}, {customer.firstname}</MenuItem>
+                            return(<MenuItem value={customer.links[0].href} key={customer.links[0].href}>{customer.lastname}, {customer.firstname}</MenuItem>)
                         })
                     }
                     </Select>
