@@ -17,7 +17,7 @@ export default function addTraining(props) {
         date: '',
         duration: 0,
         activity: '',
-        customer: '',
+        customer: ''
     });
 
     const handleClickOpen = () => {
@@ -34,6 +34,12 @@ export default function addTraining(props) {
 
     const addTraining = () => {
         props.saveTraining(training);
+        setTraining({
+            date: '',
+            duration: 0,
+            activity: '',
+            customer: ''
+        })
         handleClose();
     }
 
@@ -41,7 +47,7 @@ export default function addTraining(props) {
     
     // Asiakkaiden aakkosjärjestys lomakkeen asiakasvalintaa varten
     useEffect(()=> customersByLastname());
-    
+
     const customersByLastname = () =>{
         customers.sort((a, b) => (a.lastname > b.lastname) ? 1 : ((b.lastname > a.lastname) ? -1 : 0));
     }
@@ -74,7 +80,7 @@ export default function addTraining(props) {
                     variant="standard"
                 />
                 <TextField
-                    margin="dense"
+                    //margin="dense"
                     name="activity"
                     value={training.activity}
                     onChange={e => handleInputChange(e)}
