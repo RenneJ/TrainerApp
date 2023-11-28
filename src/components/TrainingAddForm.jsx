@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Button, Box, TextField, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import dayjs from 'dayjs';
 
 export default function addTraining(props) {
     const [open, setOpen] = useState(false);

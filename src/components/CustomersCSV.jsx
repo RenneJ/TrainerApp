@@ -1,19 +1,9 @@
-import {useState} from 'react';
 import Button from '@mui/material/Button';
 
 export default function CustomersCSV({ customers }) {
     
     const createCSV = () => {
         const csvString = [
-            [
-                "Lastname",
-                "Firstname",
-                "Streetaddress",
-                "Postcode",
-                "City",
-                "Email",
-                "Phone",  
-            ],
             ...customers.map(customer => [
                 customer.lastname,
                 customer.firstname,
