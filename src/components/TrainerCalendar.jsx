@@ -12,7 +12,7 @@ export default function TrainerCalendar() {
     useEffect(()=> fetchData(), []);
 
     const fetchData = () => {
-        fetch('https://traineeapp.azurewebsites.net/gettrainings')
+        fetch('http://traineeapp.azurewebsites.net/gettrainings')
         .then(response => response.json())
         .then(data => setTrainings(data))
         .catch(err => console.error(err))
