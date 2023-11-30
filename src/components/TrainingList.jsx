@@ -59,18 +59,17 @@ export default function TrainingList() {
         }
     ]);
 
-    useEffect(()=> fetchData(), []);
+    useEffect(()=> fetchTrainings(), []);
+    useEffect(()=> fetchCustomers(), []);
 
-    const fetchData = () => {
+    const fetchTrainings = () => {
         fetch('https://traineeapp.azurewebsites.net/gettrainings')
         .then(response => response.json())
         .then(data => setTrainings(data))
         .catch(err => console.error(err))
     };
 
-    useEffect(()=> fetchCustomers(), []);
-
-    const fetchCustomers = () => {
+     const fetchCustomers = () => {
         fetch('http://traineeapp.azurewebsites.net/api/customers')
         .then(response => response.json())
         .then(data => {
@@ -78,8 +77,6 @@ export default function TrainingList() {
         })
         .catch(err => console.error(err))
     };
-
-    
 
     function dateFormatter(trainings) {
         return(
@@ -109,17 +106,17 @@ export default function TrainingList() {
             },
             body: JSON.stringify(training)
         })
-        .then(response => fetchData())
-        .catch(err => console.error(err))
-        handleSnackOpen(action);
+        .then(response => fetchTrainings())
+        .then(handleSnackOpen(action))
+        .catch(err => console.error(err));
     };
 
     const deleteTraining = (id) => {
         const action = 'Delete';
         fetch(`http://traineeapp.azurewebsites.net/api/trainings/${id}`, {method: 'DELETE'})
-        .then(response => fetchData())
-        .catch(err => console.error(err))
-        handleSnackOpen(action);
+        .then(response => fetchTrainings())
+        .then(handleSnackOpen(action))
+        .catch(err => console.error(err));
     };
 
     // Toimintojen vahvistukset; Snackbar
