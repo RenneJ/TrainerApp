@@ -4,7 +4,7 @@ import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/TrainerApp/',
+  base: 'https://rennej.github.io/TrainerApp/',
   plugins: [
     react(),
     chunkSplitPlugin()
