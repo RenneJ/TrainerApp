@@ -62,7 +62,7 @@ export default function TrainingList() {
     useEffect(()=> fetchData(), []);
 
     const fetchData = () => {
-        fetch('http://traineeapp.azurewebsites.net/gettrainings')
+        fetch('https://traineeapp.azurewebsites.net/gettrainings')
         .then(response => response.json())
         .then(data => setTrainings(data))
         .catch(err => console.error(err))
