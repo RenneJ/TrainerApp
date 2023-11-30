@@ -1,4 +1,4 @@
-import {useState, useEffect, prevState} from 'react';
+import { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 
@@ -6,14 +6,9 @@ export default function TrainerCalendar() {
     const localizer = momentLocalizer(moment);
     const [trainings, setTrainings] = useState([]);
     const [events, setEvents] = useState([]);
-/*     const [event, setEvent] = useState({
-        start: "",
-        end: "",
-        title: ""
-    }); */
     
-    var arrayvar = [];
-    var objectvar = {};
+    var calendarEventArray = [];
+    var calendarEventObject = {};
     useEffect(()=> fetchData(), []);
 
     const fetchData = () => {
@@ -23,23 +18,18 @@ export default function TrainerCalendar() {
         .catch(err => console.error(err))
     };
 
-    function makeEventList(training) {
-        /* setEvent({
-            start: moment(training.date).toDate(),
-            end: moment(training.date).add(training.duration, "m").toDate(),
-            title: `${training.customer?.firstname} ${training.customer?.lastname}(${training.activity})`
-        }) */
-        objectvar = {
+    function makeEventArray(training) {
+        calendarEventObject = {
             start: moment(training.date).toDate(),
             end: moment(training.date).add(training.duration, "m").toDate(),
             title: `${training.customer?.firstname} ${training.customer?.lastname}(${training.activity})`
         }
-        arrayvar.push(objectvar)
-        if (arrayvar.length == trainings.length){
-            setEvents(events => [...events, ...arrayvar])
+        calendarEventArray.push(calendarEventObject)
+        if (calendarEventArray.length == trainings.length){
+            setEvents(event => [...event, ...calendarEventArray])
         }
     };
-    useEffect(() => trainings.forEach((training) => makeEventList(training)), [trainings]);
+    useEffect(() => trainings.forEach((training) => makeEventArray(training)), [trainings]);
     
     return(
         <Calendar localizer={localizer} events={events} />

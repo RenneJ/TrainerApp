@@ -1,5 +1,5 @@
 import "./App.css";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -25,7 +25,7 @@ function App() {
           </Tabs>
           {value === "Customers" && <div><CustomerList /></div>}
           {value === "Trainings" && <div><TrainingList /></div>}
-          {value === "Calendar" && <div style={{height: "85vh"}}><TrainerCalendar /></div>}
+          {value === "Calendar" && <div style={ { height: "85vh" } }><TrainerCalendar /></div>}
       
         </div>
       </LocalizationProvider>
