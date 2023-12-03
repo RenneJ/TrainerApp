@@ -32,6 +32,6 @@ export default function TrainerCalendar() {
     useEffect(() => trainings.forEach((training) => makeEventArray(training)), [trainings]);
     
     return(
-        <Calendar localizer={localizer} events={events} />
+        <Calendar localizer={localizer} events={events} style={{fontFamily: 'Arial'}}/>
     );
 }

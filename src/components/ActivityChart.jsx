@@ -31,7 +31,7 @@ export default function ActivityChart() {
 
     return (
         <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={chartData} margin={{top: 50}}>
+            <BarChart data={chartData} margin={{top: 50}} style={{fontFamily: 'Arial'}}>
                 <XAxis dataKey="activity" />
                 <YAxis />
                 <Tooltip />
