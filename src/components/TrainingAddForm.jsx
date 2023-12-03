@@ -72,7 +72,7 @@ export default function addTraining(props) {
                         name="duration"
                         value={training.duration}
                         onChange={e => handleInputChange(e)}
-                        label="Duration"
+                        label="Duration (minutes)"
                         type="number"
                         fullWidth
                         variant="outlined"
