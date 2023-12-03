@@ -1,10 +1,10 @@
 import Button from '@mui/material/Button';
 
-export default function CustomersCSV({ customers }) {
+export default function CustomersCSV(props) {
     
     const createCSV = () => {
         const csvString = [
-            ...customers.map(customer => [
+            ...props.customers.map(customer => [
                 customer.lastname,
                 customer.firstname,
                 customer.streetaddress,
@@ -20,7 +20,7 @@ export default function CustomersCSV({ customers }) {
     };
 
     function downloadCSV(){
-        let file = createCSV(customers);
+        let file = createCSV(props.customers);
         let filename = 'trainer_app_customers.csv';
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(file));

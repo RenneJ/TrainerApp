@@ -31,7 +31,6 @@ export default function addTraining(props) {
     };
 
     const handleDateChange = (pickedValue)=> { 
-        //console.log(pickedValue["$d"])
         var trainingDate = pickedValue["$d"]
         setTraining({...training, date: trainingDate})   
     };

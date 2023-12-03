@@ -3,6 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 export default function ActivityChart() {
     const [trainings, setTrainings] = useState([]);
+    const [chartData, setChartData] = useState([]);
 
     useEffect(()=> fetchTrainings(), []);
 
@@ -17,18 +18,13 @@ export default function ActivityChart() {
 
     return (
         <ResponsiveContainer width="100%" height={400}>
-          <BarChart
-            data={trainings}
-            margin={{
-                top: 50
-            }}
-          >
-            <XAxis dataKey="activity" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="duration" fill="#82ca9d" />
-          </BarChart>
+            <BarChart data={trainings} margin={{top: 50}}>
+                <XAxis dataKey="activity" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="duration" fill="#82ca9d" />
+            </BarChart>
         </ResponsiveContainer>
       );
 }
