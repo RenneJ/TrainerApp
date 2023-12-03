@@ -99,7 +99,7 @@ export default function addTraining(props) {
                             MenuProps={{
                                 PaperProps: {
                                     style: {
-                                        maxHeight: 60 * 4.5 + 8,
+                                        maxHeight: 250,
                                         width: 250,
                                     },
                               }
