@@ -17,19 +17,18 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div>
-          <Tabs value={value} onChange={handleChange}>
-              <Tab value="Trainings" label="Trainings" />
-              <Tab value="Customers" label="Customers" />
-              <Tab value="Calendar" label="Calendar" />
-              <Tab value="Chart" label="Chart" />
-          </Tabs>
-          {value === "Customers" && <div><CustomerList /></div>}
-          {value === "Trainings" && <div><TrainingList /></div>}
-          {value === "Calendar" && <div style={ { height: "85vh" } }><TrainerCalendar /></div>}
-          {value === "Chart" && <div><ActivityChart /></div>}
-      
+            <Tabs value={value} onChange={handleChange}>
+                <Tab value="Trainings" label="Trainings" />
+                <Tab value="Customers" label="Customers" />
+                <Tab value="Calendar" label="Calendar" />
+                <Tab value="Chart" label="Chart" />
+            </Tabs>
+            {value === "Customers" && <div><CustomerList /></div>}
+            {value === "Trainings" && <div><TrainingList /></div>}
+            {value === "Calendar" && <div style={ { height: "85vh" } }><TrainerCalendar /></div>}
+            {value === "Chart" && <div><ActivityChart /></div>}
         </div>
-      </LocalizationProvider>
+    </LocalizationProvider>
     )
 }
 

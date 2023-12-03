@@ -85,9 +85,6 @@ export default function TrainingList() {
     };
 
     function fullNameGetter(trainings) {
-        //console.log(trainings.data);
-        // Tämä ehtolauseke korjaa virheen kun tietokannasta haetaan trainings rivi, jonka customer attribuutti on null
-        // TODO: muista päiväkirjaan tämän virheen jäljitys (joku lisäs tietokantaa trainingsrivejä ilman asiakastietoja)
         if(trainings.data.customer === null){
             var fullName = "";
         }else {

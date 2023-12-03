@@ -20,12 +20,12 @@ export default function ActivityChart() {
     // groupBy returns collection; _.forEach makes it into array and formats groupedArray to have only relevant attributes, lastly setChartData for rechart
     const groupActivities = () => {
         var groupedData = _.groupBy(trainings, training => training.activity);
-        var groupedArray = []
+        var groupedArray = [];
         _.forEach(groupedData, (trainingsArr, activity) => {
-            var durationSum = 0
+            var durationSum = 0;
             trainingsArr.forEach((training) => durationSum += training.duration);
             groupedArray.push({'activity': activity, 'duration': durationSum});
-            setChartData([...groupedArray])
+            setChartData([...groupedArray]);
         });
     };
 

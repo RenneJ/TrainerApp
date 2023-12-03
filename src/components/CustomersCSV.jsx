@@ -14,7 +14,7 @@ export default function CustomersCSV(props) {
                 customer.phone
             ])
         ]
-        .map(e => e.join(",")) 
+        .map(datum => datum.join(",")) 
         .join("\n");
         return(csvString)
     };

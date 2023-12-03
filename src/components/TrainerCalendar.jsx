@@ -29,6 +29,7 @@ export default function TrainerCalendar() {
             setEvents(event => [...event, ...calendarEventArray])
         }
     };
+    
     useEffect(() => trainings.forEach((training) => makeEventArray(training)), [trainings]);
     
     return(
