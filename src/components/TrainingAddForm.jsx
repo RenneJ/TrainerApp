@@ -42,7 +42,6 @@ export default function addTraining(props) {
 
     useEffect(()=> setCustomers(props.customers));
     
-    // Asiakkaiden aakkosjärjestys lomakkeen asiakasvalintaa varten
     useEffect(()=> customersByLastname());
 
     const customersByLastname = () =>{
